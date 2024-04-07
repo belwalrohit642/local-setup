@@ -2,8 +2,12 @@ services:
   local-setup:
     build: .
     container_name: local-setup
+    ports:
+      - "3000:3000"
+      - "4006:4006"
+      - "3306:3306"
     volumes:
-      - ./note-fullstack:/app
+      - /home/ubuntu/local-setup/note-fullstack:/app
     environment:
       - DATABASE_NAME=notes
       - DATABASE_USER=root
