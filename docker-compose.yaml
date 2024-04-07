@@ -1,0 +1,11 @@
+services:
+  local-setup:
+    build: .
+    container_name: local-setup
+    volumes:
+      - ./note-fullstack:/app
+    environment:
+      - DATABASE_NAME=notes
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=secret
+      - DATABASE_HOST=localhost
