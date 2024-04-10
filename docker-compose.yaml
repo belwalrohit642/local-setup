@@ -10,6 +10,6 @@ services:
       - /home/ubuntu/local-setup/note-fullstack:/app
     environment:
       - DATABASE_NAME=notes
-      - DATABASE_USER=root
+      - DATABASE_USER=rohit
       - DATABASE_PASSWORD=secret
       - DATABASE_HOST=localhost
