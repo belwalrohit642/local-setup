@@ -28,3 +28,4 @@ else
 fi
 
 sudo docker-compose up -d
+sudo docker exec local-setup bash -c "/app/init.sh"
