@@ -12,7 +12,7 @@ services:
           cpus: '0.5'
           memory: 500M
     environment:
-       - REACT_APP_BACKEND_TABLE=https://44.212.44.158:4007
+       - REACT_APP_BACKEND_TABLE=https://100.24.33.118:4006
       
  dev-backend:
     image: belwalrohit642/devaction-frontend:93
