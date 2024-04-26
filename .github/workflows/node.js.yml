@@ -61,6 +61,16 @@ jobs:
       - name: Install Backend Dependencies
         run: npm install
         working-directory: server
+  build_docker_images:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker Images
+      run: |
+        docker build -t belwalrohit642/devaction-frontend:${{ github.run_number }} notes-ui
+        docker build -t belwalrohit642/devaction-backend:${{ github.run_number }} server
 
       # - name: Test Backend
       #   run: npm test
