@@ -1,24 +1,46 @@
+version: '3.8'
+
 services:
-  local-setup:
-    build: .
-    container_name: local-setup
+ dev-frontend:
+    image: belwalrohit642/devaction-frontend:93
+    container_name: dev-frontend 
     ports:
-      - "3000:3000"
-      - "4006:4006"
-    volumes:
-      - /home/ubuntu/local-setup/note-fullstack:/app
+      - "6001:3000"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
     environment:
+       - REACT_APP_BACKEND_TABLE=https://44.212.44.158:4007
+      
+ dev-backend:
+    image: belwalrohit642/devaction-frontend:93
+    container_name: dev-backend
+    ports:
+      - "4006:4006"
+    environment:
+      - APP_ENV=development
       - DATABASE_NAME=notes
       - DATABASE_USER=root
-      - DATABASE_PASSWORD=secret
+      - DATABASE_PASSWORD=my-secret
       - DATABASE_HOST=dev-database
-  dev-database:
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+ dev-database:
     image: belwalrohit642/dev-database:latest
-    container_name: dev-database
+    container_name: dev-database 
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-    volumes:
-        - /mnt/mysql:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: my-secret
     ports:
       - "3306:3306"
+    volumes:
+      - mysql-db:/var/lib/mysql
+
+volumes:
+  mysql-db:
