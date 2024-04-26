@@ -71,3 +71,27 @@ jobs:
         file: note-fullstack/server/Dockerfile
         push: true
         tags: belwalrohit642/devaction-backend:${{ github.run_number }}
+
+ deploy_with_docker_compose:
+    needs: push_docker_images
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Update docker-compose.yaml
+      run: |
+        echo "Updating docker-compose.yaml with new image tags..."
+        sed -i "s|image: belwalrohit642/dev-frontend:.*|image: belwalrohit642/dev-frontend:${{ github.run_number }}|" docker-compose.yaml
+        sed -i "s|image: belwalrohit642/dev-backend:.*|image: belwalrohit642/dev-backend:${{ github.run_number }}|" docker-compose.yaml
+
+    - name: Deploy with Docker Compose
+      uses: appleboy/ssh-action@master
+      with:
+        host: 44.212.44.158
+        username: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          echo "Deploying with Docker Compose..."
+          cd /home/ubuntu
+          sudo docker-compose up -d
