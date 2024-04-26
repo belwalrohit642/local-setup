@@ -15,7 +15,7 @@ services:
        - REACT_APP_BACKEND_TABLE=http://100.24.33.118:4006
       
  dev-backend:
-    image: belwalrohit642/devaction-frontend:93
+    image: belwalrohit642/devaction-backend:93
     container_name: dev-backend
     ports:
       - "4006:4006"
