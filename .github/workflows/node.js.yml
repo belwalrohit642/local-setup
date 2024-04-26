@@ -95,5 +95,5 @@ jobs:
         script: |
           echo "Deploying with Docker Compose..."
           cd /home/ubuntu
-          pwd
+          ls -al
           sudo docker-compose up -d
