@@ -20,7 +20,7 @@ class Table extends Component {
 
     componentDidMount() {
         this.setState({ isLoading: true })
-        let api_url = 'http://100.24.31.209:4006/notes';
+        let api_url = process.env.REACT_APP_BACKEND_TABLE+'/notes';
         fetch(api_url)
             .then(res => {
                 if(res.status >= 400) {
